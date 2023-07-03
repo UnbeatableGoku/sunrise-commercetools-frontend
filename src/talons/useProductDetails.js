@@ -1,15 +1,14 @@
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchSingleProduct } from '../graphql/queries';
 
 const useProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
+  console.log(id);
   const [fetchDetails, { data, error }] = useLazyQuery(fetchSingleProduct, {
-    variables: {
-      singleProductId: id,
-    },
     fetchPolicy: 'no-cache',
     nextFetchPolicy: 'no-cache',
   });
@@ -19,11 +18,16 @@ const useProductDetails = () => {
   }
 
   useEffect(() => {
-    fetchDetails();
+    fetchDetails({
+      variables: {
+        singleProductId: id,
+      },
+    });
   }, []);
 
   return {
     data,
+    navigate,
   };
 };
 

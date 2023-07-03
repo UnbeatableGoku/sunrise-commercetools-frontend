@@ -64,4 +64,43 @@ const fetchSingleProduct = gql`
   }
 `;
 
-export { fetch_product, fetchSingleProduct };
+const fetchSearchedProducts = gql`
+  query SearchProducts($query: String!) {
+    searchProducts(query: $query) {
+      id
+      name {
+        en
+      }
+      slug {
+        en
+      }
+      masterVariant {
+        attributes
+        images {
+          url
+        }
+        prices {
+          value {
+            centAmount
+            currencyCode
+          }
+        }
+        sku
+      }
+    }
+  }
+`;
+
+const fetchSuggestion = gql`
+  query SearchSuggestion($keyword: String!) {
+    searchSuggestion(keyword: $keyword) {
+      text
+    }
+  }
+`;
+export {
+  fetch_product,
+  fetchSingleProduct,
+  fetchSearchedProducts,
+  fetchSuggestion,
+};

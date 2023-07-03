@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Accordion = ({ description, attributes }) => {
   const [productDetailsOpen, setProductDetailsOpen] = useState(false);

@@ -1,13 +1,11 @@
-import { Link } from 'react-router-dom';
 import useProductDetails from '../../talons/useProductDetails';
 import { find } from 'lodash';
 import Accordion from '../accordion/Accordion';
 import { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 const ProductDetails = () => {
-  const { data } = useProductDetails();
+  const { data, navigate } = useProductDetails();
 
-  console.log(data);
   const gender = find(data?.singleProduct?.masterVariant?.attributes, {
     name: 'gender',
   })?.value?.key;
@@ -30,9 +28,9 @@ const ProductDetails = () => {
           <div class='w-full px-4'>
             <ul class='flex flex-wrap items-center mb-16'>
               <li class='mr-6'>
-                <Link
+                <button
                   class='flex items-center text-sm font-medium text-gray-400 hover:text-gray-500'
-                  to='/product'
+                  onClick={() => navigate(-1)}
                 >
                   <span>Home</span>
                   <svg
@@ -48,7 +46,7 @@ const ProductDetails = () => {
                       fill='currentColor'
                     ></path>
                   </svg>
-                </Link>
+                </button>
               </li>
 
               <li>
@@ -144,7 +142,7 @@ const ProductDetails = () => {
                     </button>
                   </div>
                 ) : (
-                  <div class='w-full   mb-2 md:mb-0'>
+                  <div class='md:w-full w-3/4    mb-2 md:mb-0'>
                     <span
                       onClick={() => increment()}
                       className='block py-3 font-heading font-medium  text-lg text-white text-center bg-slate-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-700 rounded-sm cursor-pointer'
@@ -153,7 +151,7 @@ const ProductDetails = () => {
                     </span>
                   </div>
                 )}
-                <button className='ms-3  py-4  items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-slate-900 px-3  focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-sm'>
+                <button className=' ms-1 mb-2 sm:mb-0 sm:ms-4  py-4  items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-slate-900 px-3 sm:px-4 focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-sm'>
                   <svg
                     width='23'
                     height='22'

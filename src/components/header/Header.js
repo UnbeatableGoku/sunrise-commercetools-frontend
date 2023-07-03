@@ -1,3 +1,5 @@
+import SearchBar from '../serchbar/SearchBar';
+
 const Header = ({ dark, setDark }) => {
   return (
     <header className='bg-gray-100 dark:bg-gray-700 '>
@@ -10,6 +12,7 @@ const Header = ({ dark, setDark }) => {
             >
               SUNRISE
             </a>
+
             {!dark ? (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -57,6 +60,7 @@ const Header = ({ dark, setDark }) => {
             </button>
           </div>
         </nav>
+        <SearchBar />
       </div>
     </header>
   );

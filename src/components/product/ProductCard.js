@@ -1,5 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * Product card component to display product information.
+ *
+ * @param {Object} props - The props containing product data.
+ * @param {Object} props.props - The product data.
+ * @param {string} props.props.id - The ID of the product.
+ * @param {Array} props.props.masterVariant.images - The images of the product.
+ * @param {string} props.props.masterVariant.images[].url - The URL of the image.
+ * @param {Object} props.props.name - The name of the product.
+ * @param {string} props.props.name.en - The English name of the product.
+ * @returns {JSX.Element} The product card component.
+ */
 
 const ProductCard = ({ props }) => {
   return (
@@ -37,6 +51,22 @@ const ProductCard = ({ props }) => {
       </div>
     </div>
   );
+};
+
+ProductCard.propTypes = {
+  props: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    masterVariant: PropTypes.shape({
+      images: PropTypes.arrayOf(
+        PropTypes.shape({
+          url: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    }).isRequired,
+    name: PropTypes.shape({
+      en: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default ProductCard;
