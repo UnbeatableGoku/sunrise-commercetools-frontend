@@ -64,5 +64,20 @@ const Accordion = ({ description, attributes }) => {
     </div>
   );
 };
+Accordion.propTypes = {
+  description: PropTypes.string,
+  attributes: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+          key: PropTypes.string,
+          en: PropTypes.string,
+        }),
+      ]),
+    })
+  ),
+};
 
 export default Accordion;

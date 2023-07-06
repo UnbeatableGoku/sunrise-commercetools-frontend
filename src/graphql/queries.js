@@ -98,9 +98,23 @@ const fetchSuggestion = gql`
     }
   }
 `;
+
+const checkExistUserMutation = gql`
+  mutation VerifyExistUser($email: String!, $phoneNumber: String!) {
+    verifyExistUser(email: $email, phoneNumber: $phoneNumber)
+  }
+`;
+
+const createCustomer = gql`
+  mutation CreateCustomer($email: String!, $phoneNumber: String!) {
+    createCustomer(email: $email, phoneNumber: $phoneNumber)
+  }
+`;
 export {
   fetch_product,
   fetchSingleProduct,
   fetchSearchedProducts,
   fetchSuggestion,
+  checkExistUserMutation,
+  createCustomer,
 };

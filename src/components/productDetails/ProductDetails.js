@@ -22,19 +22,19 @@ const ProductDetails = () => {
     setCartQty(cartQty - 1);
   };
   return (
-    <section class='pt-12 pb-24 bg-blueGray-100 rounded-b-10xl overflow-hidden'>
-      <div class='container px-4 mx-auto'>
-        <div class='flex flex-wrap -mx-4'>
-          <div class='w-full px-4'>
-            <ul class='flex flex-wrap items-center mb-16'>
-              <li class='mr-6'>
+    <section className='pt-12 pb-24 bg-blueGray-100 rounded-b-10xl overflow-hidden'>
+      <div className='container px-4 mx-auto'>
+        <div className='flex flex-wrap -mx-4'>
+          <div className='w-full px-4'>
+            <ul className='flex flex-wrap items-center mb-16'>
+              <li className='mr-6'>
                 <button
-                  class='flex items-center text-sm font-medium text-gray-400 hover:text-gray-500'
+                  className='flex items-center text-sm font-medium text-gray-400 hover:text-gray-500'
                   onClick={() => navigate(-1)}
                 >
                   <span>Home</span>
                   <svg
-                    class='ml-6'
+                    className='ml-6'
                     width='4'
                     height='7'
                     viewbox='0 0 4 7'
@@ -51,7 +51,7 @@ const ProductDetails = () => {
 
               <li>
                 <span
-                  class='text-sm font-medium text-slate-700 hover:text-slate-900 capitalize'
+                  className='text-sm font-medium text-slate-700 hover:text-slate-900 capitalize'
                   href='#'
                 >
                   {data?.singleProduct?.name?.en}
@@ -59,33 +59,33 @@ const ProductDetails = () => {
               </li>
             </ul>
           </div>
-          <div class='w-full lg:w-1/3 px-4 mb-16 lg:mb-0'>
-            <div class='flex  flex-wrap items-center  lg:justify-center lg:items-center xl:items-center'>
-              <div class='w-full sm:w-9/12 px-10'>
+          <div className='w-full lg:w-1/3 px-4 mb-16 lg:mb-0'>
+            <div className='flex  flex-wrap items-center  lg:justify-center lg:items-center xl:items-center'>
+              <div className='w-full sm:w-9/12 px-10'>
                 <img
-                  class='mb-5'
+                  className='mb-5'
                   src={data?.singleProduct?.masterVariant?.images[0].url}
                   alt=''
                 />
               </div>
             </div>
           </div>
-          <div class='w-full lg:w-2/3 px-4'>
-            <div class='max-w-md mb-6'>
-              <span class='text-xs text-gray-400 tracking-wider'>
+          <div className='w-full lg:w-2/3 px-4'>
+            <div className='max-w-md mb-6'>
+              <span className='text-xs text-gray-400 tracking-wider'>
                 {data?.singleProduct?.masterVariant?.sku}
               </span>
-              <h2 class='mt-6 mb-4 text-2xl  font-heading  font-light'>
+              <h2 className='mt-6 mb-4 text-2xl  font-heading  font-light'>
                 {data?.singleProduct?.name?.en}
               </h2>
-              <p class='flex items-center mb-6'>
-                <span class='mr-2 text-sm text-slate-500 font-medium'>
+              <p className='flex items-center mb-6'>
+                <span className='mr-2 text-sm text-slate-500 font-medium'>
                   {
                     data?.singleProduct?.masterVariant?.prices[0].value
                       .currencyCode
                   }
                 </span>
-                <span class='text-3xl text-slate-700 font-medium'>
+                <span className='text-3xl text-slate-700 font-medium'>
                   {
                     data?.singleProduct?.masterVariant?.prices[0].value
                       .centAmount
@@ -93,14 +93,14 @@ const ProductDetails = () => {
                 </span>
               </p>
 
-              <p className='text-lg'>
+              <p classNameName='text-lg'>
                 Gender :{' '}
-                <span className='text-lg  text-gray-400 uppercase'>
+                <span classNameName='text-lg  text-gray-400 uppercase'>
                   {gender}
                 </span>
               </p>
             </div>
-            <div class='inline-flex mb-6 items-center '>
+            <div className='inline-flex mb-6 items-center '>
               <Rating
                 allowFraction={true}
                 size={23}
@@ -108,50 +108,53 @@ const ProductDetails = () => {
                 initialValue={4.4}
                 readonly={true}
               />
-              <span class='text-md text-gray-400 pt-1 ms-2'>(4.4)</span>
+              <span className='text-md text-gray-400 pt-1 ms-2'>(4.4)</span>
             </div>
-            <div class='mb-6'>
-              <h4 class='mb-3 font-heading font-medium'>
+            <div className='mb-6'>
+              <h4 className='mb-3 font-heading font-medium'>
                 <span>Color : </span>
-                <span class='text-gray-400 uppercase'>{color}</span>
+                <span className='text-gray-400 uppercase'>{color}</span>
               </h4>
-              <button class='inline-flex items-center justify-center p-1 rounded-full border border-gray-300'>
+              <button className='inline-flex items-center justify-center p-1 rounded-full border border-gray-300'>
                 <div
-                  class='w-6 h-6 rounded-full bg-white'
+                  className='w-6 h-6 rounded-full bg-white'
                   style={{ backgroundColor: color }}
                 ></div>
               </button>
             </div>
-            <div className='w-full'>
-              <div class='flex items-center  w-[400px] mb-12'>
+            <div classNameName='w-full'>
+              <div className='flex items-center  w-[400px] mb-12'>
                 {cartQty > 0 ? (
-                  <div className='flex  items-center justify-between  w-full px-2 mb-2 md:mb-0 border-2 border-slate-500 rounded-md'>
-                    <button onClick={() => decrement()} className='text-4xl'>
+                  <div classNameName='flex  items-center justify-between  w-full px-2 mb-2 md:mb-0 border-2 border-slate-500 rounded-md'>
+                    <button
+                      onClick={() => decrement()}
+                      classNameName='text-4xl'
+                    >
                       -
                     </button>
 
-                    <span className='px-4 font-semibold  text-2xl'>
+                    <span classNameName='px-4 font-semibold  text-2xl'>
                       {cartQty}
                     </span>
 
                     <button
                       onClick={() => increment()}
-                      className='text-4xl py-1'
+                      classNameName='text-4xl py-1'
                     >
                       +
                     </button>
                   </div>
                 ) : (
-                  <div class='md:w-full w-3/4    mb-2 md:mb-0'>
+                  <div className='md:w-full w-3/4    mb-2 md:mb-0'>
                     <span
                       onClick={() => increment()}
-                      className='block py-3 font-heading font-medium  text-lg text-white text-center bg-slate-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-700 rounded-sm cursor-pointer'
+                      classNameName='block py-3 font-heading font-medium  text-lg text-white text-center bg-slate-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-700 rounded-sm cursor-pointer'
                     >
                       ADD TO CART
                     </span>
                   </div>
                 )}
-                <button className=' ms-1 mb-2 sm:mb-0 sm:ms-4  py-4  items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-slate-900 px-3 sm:px-4 focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-sm'>
+                <button classNameName=' ms-1 mb-2 sm:mb-0 sm:ms-4  py-4  items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-slate-900 px-3 sm:px-4 focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-sm'>
                   <svg
                     width='23'
                     height='22'
@@ -172,7 +175,9 @@ const ProductDetails = () => {
             </div>
 
             <div>
-              <h4 class='mb-6 font-heading font-medium'>More information...</h4>
+              <h4 className='mb-6 font-heading font-medium'>
+                More information...
+              </h4>
               <Accordion
                 description={data?.singleProduct?.metaDescription?.en}
                 attributes={data?.singleProduct?.masterVariant?.attributes}

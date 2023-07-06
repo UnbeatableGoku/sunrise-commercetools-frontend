@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import FormModal from '../modal/formModal';
 import SearchBar from '../serchbar/SearchBar';
 
 const Header = ({ dark, setDark }) => {
@@ -31,7 +33,7 @@ const Header = ({ dark, setDark }) => {
                 width='28'
                 height='28'
                 fill='currentColor'
-                class='bi bi-sunset-fill text-yellow-600'
+                className='bi bi-sunset-fill text-yellow-600'
                 viewBox='0 0 16 16'
               >
                 {' '}
@@ -39,7 +41,7 @@ const Header = ({ dark, setDark }) => {
               </svg>
             )}
           </div>
-          <div className='flex items-center'>
+          {/* <div className='flex items-center'>
             <button
               onClick={() => setDark(!dark)}
               href='/contact'
@@ -50,7 +52,7 @@ const Header = ({ dark, setDark }) => {
                 width='26'
                 height='26'
                 fill='currentColor'
-                class='bi bi-emoji-sunglasses'
+                className='bi bi-emoji-sunglasses'
                 viewBox='0 0 16 16'
               >
                 {' '}
@@ -58,6 +60,9 @@ const Header = ({ dark, setDark }) => {
                 <path d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0z' />
               </svg>
             </button>
+          </div> */}
+          <div>
+            <FormModal />
           </div>
         </nav>
         <SearchBar />
