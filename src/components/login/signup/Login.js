@@ -103,6 +103,8 @@ const Login = () => {
         >
           <input
             placeholder='Email'
+            type="email"
+            required
             {...register('email')}
             className='border-b-2 pt-2 mb-5 outline-none focus:border-b-black'
           />

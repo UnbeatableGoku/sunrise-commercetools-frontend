@@ -48,6 +48,7 @@ const Signup = () => {
           <input
             {...register('email')}
             placeholder='Email'
+            type='email'
             className='border-b-2 pt-2 mb-5 outline-none  focus:border-b-black'
           />
           <input
