@@ -25,7 +25,7 @@ export default function FormModal() {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Open regular modal
+        Login / Signup
       </button>
       {showModal ? (
         <>

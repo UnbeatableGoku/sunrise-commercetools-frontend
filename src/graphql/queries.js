@@ -106,8 +106,8 @@ const checkExistUserMutation = gql`
 `;
 
 const createCustomer = gql`
-  mutation CreateCustomer($email: String!, $phoneNumber: String!) {
-    createCustomer(email: $email, phoneNumber: $phoneNumber)
+  mutation CreateCustomer($tokenId: String!) {
+    createCustomer(tokenId: $tokenId)
   }
 `;
 export {

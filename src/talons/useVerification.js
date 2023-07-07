@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   EmailAuthProvider,
   linkWithCredential,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../config/firebaseConfiguration";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
-import { checkExistUserMutation, createCustomer } from "../graphql/queries";
-import { toast } from "react-toastify";
+  updateProfile,
+} from 'firebase/auth';
+import { auth } from '../config/firebaseConfiguration';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@apollo/client';
+import { checkExistUserMutation, createCustomer } from '../graphql/queries';
+import { toast } from 'react-toastify';
 
 const useVerification = () => {
   const { handleSubmit, register } = useForm();
   const [showOtp, setShowOtp] = useState(false);
-  const [otp, setOtp] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [otp, setOtp] = useState('');
+  const [mobile, setMobile] = useState('');
   const [checkExistUser, { error }] = useMutation(checkExistUserMutation, {
-    fetchPolicy: "no-cache",
+    fetchPolicy: 'no-cache',
   });
   const [createNewUser, { error: userError }] = useMutation(createCustomer);
 
@@ -40,8 +41,8 @@ const useVerification = () => {
         setShowOtp(true);
       }
       if (data.verifyExistUser.userExist === true) {
-        toast.error("User Already Exist");
-        console.log("user already exist");
+        toast.error('User Already Exist');
+        console.log('user already exist');
       }
     } catch (error) {
       console.log(error);
@@ -50,14 +51,14 @@ const useVerification = () => {
 
   function onSignup(moblieNo) {
     const appVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
+      'recaptcha-container',
       {
-        size: "invisible",
+        size: 'invisible',
         callback: (response) => {
-          console.log("reCAPTCHA verified");
+          console.log('reCAPTCHA verified');
         },
-        "expired-callback": () => {
-          console.log("reCAPTCHA expired");
+        'expired-callback': () => {
+          console.log('reCAPTCHA expired');
         },
       },
       auth
@@ -67,32 +68,38 @@ const useVerification = () => {
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         toast.success("OTP Sent Don't Refresh The Page ");
-        console.log("OTP sent");
+        console.log('OTP sent');
       })
       .catch((error) => {
-        console.log("Error sending OTP:", error);
+        console.log('Error sending OTP:', error);
       });
   }
 
-  async function handleUserRegister({ email, password }) {
-    const updatedMobileNo = mobile.slice(3);
-
+  async function handleUserRegister({ email, password, name }) {
     console.log(email, password, otp);
     try {
       const credential = await window.confirmationResult.confirm(otp);
       const user = credential.user;
-      console.log(email, password);
-      await linkEmailPasswordProvider(user, email, password);
-      console.log("Email/password provider added to the user:", user);
+      console.log(user);
+      const result = await updateProfile(user, { displayName: name });
+      console.log(result);
+      const anotherUser = await linkEmailPasswordProvider(
+        user,
+        email,
+        password
+      );
+      console.log(anotherUser);
       const { data } = await createNewUser({
         variables: {
-          email,
-          phoneNumber: mobile,
+          tokenId: user.accessToken,
         },
       });
       console.log(data);
+      if(data.createCustomer){
+        toast.success('User Created Successfully')
+      }
     } catch (error) {
-      console.log("Error verifying OTP:", error);
+      console.log('Error verifying OTP:', error);
     }
   }
   async function linkEmailPasswordProvider(user, email, password) {
@@ -100,15 +107,18 @@ const useVerification = () => {
     try {
       await linkWithCredential(user, credential);
 
-      console.log("Email/password provider linked successfully");
+      console.log('Email/password provider linked successfully');
     } catch (error) {
-      console.log("Error linking email/password provider:", error);
+      console.log('Error linking email/password provider:', error);
     }
   }
   async function loginWithEmail({ email, password }) {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       console.log(result);
+      if(result){
+        toast.success('User Login Successfully')
+      }
     } catch (error) {
       console.log(error);
     }
@@ -130,6 +140,10 @@ const useVerification = () => {
     try {
       const credential = await window.confirmationResult.confirm(otp);
       console.log(credential);
+      if(credential){
+        toast.success('User Login Successfully')
+
+      }
     } catch (error) {
       console.log(error);
     }
