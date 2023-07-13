@@ -11,11 +11,11 @@ const Login = () => {
     setOtp,
     loginWithMobile,
     showOtp,
-    verifyLoginMobile,
     register,
     loginWithEmail,
     mobile,
     setMobile,
+    checkMobileExistUser,
   } = useVerification();
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const handlePhoneChange = (value) => {
@@ -39,7 +39,9 @@ const Login = () => {
     >
       <div className='flex'>
         <form
-          onSubmit={handleSubmit(showOtp ? loginWithMobile : verifyLoginMobile)}
+          onSubmit={handleSubmit(
+            showOtp ? loginWithMobile : checkMobileExistUser
+          )}
           className={`transition-all duration-200 flex-col flex-1 ${
             toggleFormType ? 'absolute -right-full' : 'relative flex right-0'
           }`}
@@ -103,7 +105,7 @@ const Login = () => {
         >
           <input
             placeholder='Email'
-            type="email"
+            type='email'
             required
             {...register('email')}
             className='border-b-2 pt-2 mb-5 outline-none focus:border-b-black'

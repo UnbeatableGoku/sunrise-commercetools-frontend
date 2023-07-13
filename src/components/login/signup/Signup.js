@@ -16,6 +16,7 @@ const Signup = () => {
     showOtp,
     mobile,
     setMobile,
+    
   } = useVerification();
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const handlePhoneChange = (value) => {

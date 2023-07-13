@@ -6,6 +6,7 @@ import {
   linkWithCredential,
   signInWithEmailAndPassword,
   updateProfile,
+  GoogleAuthProvider,
 } from 'firebase/auth';
 import { auth } from '../config/firebaseConfiguration';
 import { useForm } from 'react-hook-form';
@@ -29,7 +30,6 @@ const useVerification = () => {
 
   async function handleCheckUserExist({ email }) {
     try {
-      const updatedMobileNo = mobile.slice(3);
       const { data } = await checkExistUser({
         variables: {
           email,
@@ -95,8 +95,8 @@ const useVerification = () => {
         },
       });
       console.log(data);
-      if(data.createCustomer){
-        toast.success('User Created Successfully')
+      if (data.createCustomer) {
+        toast.success('User Created Successfully');
       }
     } catch (error) {
       console.log('Error verifying OTP:', error);
@@ -116,19 +116,34 @@ const useVerification = () => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       console.log(result);
-      if(result){
-        toast.success('User Login Successfully')
+      if (result) {
+        toast.success('User Login Successfully');
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function verifyLoginMobile() {
-    const updatedMobileNo = mobile.slice(3);
-
+  async function checkMobileExistUser({ email }) {
     try {
-      console.log(updatedMobileNo);
+      const { data } = await checkExistUser({
+        variables: {
+          email,
+          phoneNumber: mobile,
+        },
+      });
+      if (data.verifyExistUser.userExist === false) {
+        toast.error('No User Found Please try to signup first ');
+      }
+      if (data.verifyExistUser.userExist === true) {
+        verifyMobileWithOtp();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function verifyMobileWithOtp() {
+    try {
       onSignup(mobile);
       setShowOtp(true);
     } catch (error) {
@@ -140,14 +155,15 @@ const useVerification = () => {
     try {
       const credential = await window.confirmationResult.confirm(otp);
       console.log(credential);
-      if(credential){
-        toast.success('User Login Successfully')
-
+      if (credential) {
+        toast.success('User Login Successfully');
       }
     } catch (error) {
       console.log(error);
     }
   }
+
+  
   return {
     onSignup,
     handleSubmit,
@@ -158,10 +174,11 @@ const useVerification = () => {
     otp,
     setOtp,
     loginWithMobile,
-    verifyLoginMobile,
+    verifyMobileWithOtp,
     loginWithEmail,
     setMobile,
     mobile,
+    checkMobileExistUser,
   };
 };
 

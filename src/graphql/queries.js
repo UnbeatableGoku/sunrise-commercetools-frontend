@@ -110,6 +110,12 @@ const createCustomer = gql`
     createCustomer(tokenId: $tokenId)
   }
 `;
+
+const createCustomerWithSocials = gql`
+  mutation VerifySocialUser($token: String!) {
+    verifySocialUser(token: $token)
+  }
+`;
 export {
   fetch_product,
   fetchSingleProduct,
@@ -117,4 +123,5 @@ export {
   fetchSuggestion,
   checkExistUserMutation,
   createCustomer,
+  createCustomerWithSocials
 };
