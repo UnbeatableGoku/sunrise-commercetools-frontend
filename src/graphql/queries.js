@@ -116,6 +116,35 @@ const createCustomerWithSocials = gql`
     verifySocialUser(token: $token)
   }
 `;
+const generateToken = gql`
+  mutation GenerateToken($token: String!) {
+    generateToken(token: $token)
+  }
+`;
+
+const addProductToCart = gql`
+  mutation AddItemsToCart(
+    $productId: String!
+    $cartId: String!
+    $versionId: String!
+  ) {
+    addItemsToCart(
+      productId: $productId
+      cartId: $cartId
+      versionId: $versionId
+    )
+  }
+`;
+const createCart = gql`
+  mutation CreateCart($productId: String!) {
+    createCart(productId: $productId)
+  }
+`;
+
+const removeItemFromCart=gql`
+mutation RemoveItemFromCart($lineItemId: String!, $cartId: String!, $versionId: String!) {
+  removeItemFromCart(lineItemId: $productId, cartId: $cartId, versionId: $versionId)
+}`
 export {
   fetch_product,
   fetchSingleProduct,
@@ -123,5 +152,9 @@ export {
   fetchSuggestion,
   checkExistUserMutation,
   createCustomer,
-  createCustomerWithSocials
+  createCustomerWithSocials,
+  generateToken,
+  addProductToCart,
+  createCart,
+  removeItemFromCart
 };

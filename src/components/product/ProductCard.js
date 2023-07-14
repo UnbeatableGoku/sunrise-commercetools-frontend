@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useProductCard from '../../talons/useProductCard';
 
 /**
  * Product card component to display product information.
@@ -16,6 +17,7 @@ import PropTypes from 'prop-types';
  */
 
 const ProductCard = ({ props }) => {
+  const { handleAddToCart, handleRemoveFromCart } = useProductCard();
   return (
     <div className='bg-white dark:bg-gray-700  border shadow-sm rounded-md m-3 dark:shadow-slate-500  shadow-slate-400'>
       <div className='h-[250px] overflow-hidden'>
@@ -45,8 +47,7 @@ const ProductCard = ({ props }) => {
         </Link>
 
         <div className='bg-indigo-700 dark:bg-white dark:text-black text-white p-2 rounded-md'>
-          {' '}
-          Add to Cart
+          <button onClick={() => handleAddToCart(props.id)}>Add to Cart</button>
         </div>
       </div>
     </div>
