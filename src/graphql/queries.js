@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const fetch_product = gql`
   query GetProducts {
@@ -141,10 +141,65 @@ const createCart = gql`
   }
 `;
 
-const removeItemFromCart=gql`
-mutation RemoveItemFromCart($lineItemId: String!, $cartId: String!, $versionId: String!) {
-  removeItemFromCart(lineItemId: $productId, cartId: $cartId, versionId: $versionId)
-}`
+const removeItemFromCart = gql`
+  mutation RemoveItemFromCart(
+    $lineItemId: String!
+    $cartId: String!
+    $versionId: String!
+  ) {
+    removeItemFromCart(
+      lineItemId: $lineItemId
+      cartId: $cartId
+      versionId: $versionId
+    )
+  }
+`;
+
+const getCartItems = gql`
+  mutation GetCartById($cartId: String!) {
+    getCartById(cartId: $cartId)
+  }
+`;
+
+const changeCartQty = gql`
+  mutation ChangeCartItemsQty(
+    $cartId: String!
+    $versionId: String!
+    $lineItemId: String!
+    $quantity: Int!
+  ) {
+    changeCartItemsQty(
+      cartId: $cartId
+      versionId: $versionId
+      lineItemId: $lineItemId
+      quantity: $quantity
+    )
+  }
+`;
+
+const addEmail = gql`
+  mutation AddEmailIdAsGuest(
+    $cartId: String!
+    $versionId: String!
+    $email: String!
+  ) {
+    addEmailIdAsGuest(cartId: $cartId, versionId: $versionId, email: $email)
+  }
+`;
+
+const addShippingAddress = gql`
+  mutation AddShippingAddress(
+    $cartId: String!
+    $versionId: String!
+    $shippingAddresInput: shippingAddress
+  ) {
+    addShippingAddress(
+      cartId: $cartId
+      versionId: $versionId
+      shippingAddresInput: $shippingAddresInput
+    )
+  }
+`;
 export {
   fetch_product,
   fetchSingleProduct,
@@ -156,5 +211,9 @@ export {
   generateToken,
   addProductToCart,
   createCart,
-  removeItemFromCart
+  removeItemFromCart,
+  getCartItems,
+  changeCartQty,
+  addEmail,
+  addShippingAddress,
 };

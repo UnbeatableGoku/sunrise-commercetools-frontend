@@ -1,43 +1,47 @@
-import { useState } from 'react';
-import FormModal from '../modal/formModal';
-import SearchBar from '../serchbar/SearchBar';
-
+import { useState } from "react";
+import FormModal from "../modal/formModal";
+import SearchBar from "../serchbar/SearchBar";
+import Cart from "../cart/Cart";
+import useHeader from "../../talons/useHeader";
 const Header = ({ dark, setDark }) => {
+  const [showCart, setShowCart] = useState(false);
+  const { cartItems } = useHeader();
+
   return (
-    <header className='bg-gray-100 dark:bg-gray-700 '>
-      <div className='container mx-auto px-5 py-4'>
-        <nav className='flex items-center justify-between'>
-          <div className='flex items-center'>
+    <header className="bg-gray-100 dark:bg-gray-700 ">
+      <div className="container mx-auto px-5 py-4">
+        <nav className="flex items-center justify-between">
+          <div className="flex items-center">
             <a
-              href='/'
-              className='text-2xl font-bold text-gray-900 dark:text-white p-2'
+              href="/"
+              className="text-2xl font-bold text-gray-900 dark:text-white p-2"
             >
               SUNRISE
             </a>
 
             {!dark ? (
               <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='28'
-                height='28'
-                fill='currentColor'
-                className='bi bi-sunrise-fill text-yellow-600'
-                viewBox='0 0 16 16'
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                className="bi bi-sunrise-fill text-yellow-600"
+                viewBox="0 0 16 16"
               >
-                {' '}
-                <path d='M7.646 1.146a.5.5 0 0 1 .708 0l1.5 1.5a.5.5 0 0 1-.708.708L8.5 2.707V4.5a.5.5 0 0 1-1 0V2.707l-.646.647a.5.5 0 1 1-.708-.708l1.5-1.5zM2.343 4.343a.5.5 0 0 1 .707 0l1.414 1.414a.5.5 0 0 1-.707.707L2.343 5.05a.5.5 0 0 1 0-.707zm11.314 0a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zM11.709 11.5a4 4 0 1 0-7.418 0H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1h-3.79zM0 10a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 10zm13 0a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z' />
+                {" "}
+                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l1.5 1.5a.5.5 0 0 1-.708.708L8.5 2.707V4.5a.5.5 0 0 1-1 0V2.707l-.646.647a.5.5 0 1 1-.708-.708l1.5-1.5zM2.343 4.343a.5.5 0 0 1 .707 0l1.414 1.414a.5.5 0 0 1-.707.707L2.343 5.05a.5.5 0 0 1 0-.707zm11.314 0a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zM11.709 11.5a4 4 0 1 0-7.418 0H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1h-3.79zM0 10a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 10zm13 0a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
               </svg>
             ) : (
               <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='28'
-                height='28'
-                fill='currentColor'
-                className='bi bi-sunset-fill text-yellow-600'
-                viewBox='0 0 16 16'
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                className="bi bi-sunset-fill text-yellow-600"
+                viewBox="0 0 16 16"
               >
-                {' '}
-                <path d='M7.646 4.854a.5.5 0 0 0 .708 0l1.5-1.5a.5.5 0 0 0-.708-.708l-.646.647V1.5a.5.5 0 0 0-1 0v1.793l-.646-.647a.5.5 0 1 0-.708.708l1.5 1.5zm-5.303-.51a.5.5 0 0 1 .707 0l1.414 1.413a.5.5 0 0 1-.707.707L2.343 5.05a.5.5 0 0 1 0-.707zm11.314 0a.5.5 0 0 1 0 .706l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zM11.709 11.5a4 4 0 1 0-7.418 0H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1h-3.79zM0 10a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 10zm13 0a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z' />
+                {" "}
+                <path d="M7.646 4.854a.5.5 0 0 0 .708 0l1.5-1.5a.5.5 0 0 0-.708-.708l-.646.647V1.5a.5.5 0 0 0-1 0v1.793l-.646-.647a.5.5 0 1 0-.708.708l1.5 1.5zm-5.303-.51a.5.5 0 0 1 .707 0l1.414 1.413a.5.5 0 0 1-.707.707L2.343 5.05a.5.5 0 0 1 0-.707zm11.314 0a.5.5 0 0 1 0 .706l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zM11.709 11.5a4 4 0 1 0-7.418 0H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1h-3.79zM0 10a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 10zm13 0a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
               </svg>
             )}
           </div>
@@ -61,24 +65,38 @@ const Header = ({ dark, setDark }) => {
               </svg>
             </button>
           </div> */}
-          <div className='w-full'>
+          <div className="w-full">
             <SearchBar />
           </div>
           <div>
             <div>
               <FormModal />
             </div>
-            <div>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width={16}
-                height={16}
-                fill='currentColor'
-                className='bi bi-bag-fill'
-                viewBox='0 0 16 16'
-              >
-                <path d='M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z' />
-              </svg>
+            <div className="relative">
+              <div className="relative">
+                <button onClick={() => setShowCart(!showCart)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={30}
+                    height={30}
+                    fill="currentColor"
+                    className="bi bi-bag-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
+                  </svg>
+                </button>
+                {cartItems && cartItems?.lineItems.length>0 && (
+                  <span className="absolute bg-red-500 text-white rounded-full px-1 text-xs left-5">
+                    {cartItems?.lineItems.length}
+                  </span>
+                )}
+              </div>
+              {showCart && (
+                <div className="absolute z-50 bg-white right-12">
+                  <Cart cartItems={cartItems ? cartItems : null} />
+                </div>
+              )}
             </div>
           </div>
         </nav>

@@ -41,3 +41,8 @@ code {
   border: none !important;
   /* Add any additional styles you want for the focused state */
 }
+
+.rotate-90 {
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease-in-out;
+}
