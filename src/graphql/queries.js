@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 const fetch_product = gql`
   query GetProducts {
@@ -200,6 +200,73 @@ const addShippingAddress = gql`
     )
   }
 `;
+
+const addShippingMethod = gql`
+  mutation AddShippingMethod(
+    $cartId: String!
+    $versionId: String!
+    $shippingMethodId: String!
+  ) {
+    addShippingMethod(
+      cartId: $cartId
+      versionId: $versionId
+      shippingMethodId: $shippingMethodId
+    )
+  }
+`;
+
+const addBillingAddress = gql`
+  mutation AddBillingAddress(
+    $cartId: String!
+    $versionId: String!
+    $shippingAddresInput: shippingAddress
+  ) {
+    addBillingAddress(
+      cartId: $cartId
+      versionId: $versionId
+      shippingAddresInput: $shippingAddresInput
+    )
+  }
+`;
+
+const getCartItemsWithTypeDef = gql`
+  mutation GetCartItems($cartId: String!) {
+    getCartItems(cartId: $cartId) {
+      type
+      id
+      version
+      totalLineItemQuantity
+      versionModifiedAt
+      lineItems {
+        id
+        productId
+        productKey
+        name
+        variant {
+          id
+          sku
+          images {
+            url
+          }
+        }
+        price
+
+        quantity
+      }
+      taxedPrice
+      totalPrice
+      shippingInfo
+    }
+  }
+`;
+
+const verifyUserByToken = gql`
+  query Query {
+    verifyUserByTokenId
+  }
+`;
+
+
 export {
   fetch_product,
   fetchSingleProduct,
@@ -216,4 +283,8 @@ export {
   changeCartQty,
   addEmail,
   addShippingAddress,
+  addShippingMethod,
+  addBillingAddress,
+  getCartItemsWithTypeDef,
+  verifyUserByToken,
 };

@@ -23,13 +23,13 @@ const Cart = ({ cartItems }) => {
               Total Items : <span>{cartItems.totalLineItemQuantity}</span>
             </div>
           </div>
-          <div className="flex flex-col  ">
+          <div className="flex flex-col   ">
             {size(cartItems.lineItems) > 0 &&
               cartItems.lineItems.map((item, key) => (
                 <LineItem lineItems={item} key={key} />
               ))}
           </div>
-          <div className="flex justify-between mb-2">
+          <div className="flex justify-between  sticky pb-3 bottom-0 bg-white">
             <div>
               <button className="bg-black text-white px-8 py-2 border border-black hover:bg-white hover:text-black">
                 Cart{" "}

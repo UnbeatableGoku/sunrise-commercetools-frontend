@@ -1,9 +1,13 @@
-import { useMutation } from "@apollo/client";
-import { useForm } from "react-hook-form";
-import { addEmail, addShippingAddress } from "../graphql/queries";
-import { useContext } from "react";
-import { VersionContext } from "../context/versionContext";
-import { useState } from "react";
+import { useMutation } from '@apollo/client';
+import { useForm } from 'react-hook-form';
+import {
+  addEmail,
+  addShippingAddress,
+  getCartItemsWithTypeDef,
+} from '../graphql/queries';
+import { useContext, useEffect } from 'react';
+import { VersionContext } from '../context/versionContext';
+import { useState } from 'react';
 
 const useCheckout = () => {
   const [showEmail, setShowEmail] = useState(false);
@@ -20,12 +24,38 @@ const useCheckout = () => {
   if (addressError) {
     console.log(addressError);
   }
-  const cartId = localStorage.getItem("cartId");
-  const versionId = localStorage.getItem("versionId");
+
+  const [handleCheckoutCart, { error: checkoutCartError }] = useMutation(
+    getCartItemsWithTypeDef
+  );
+
+  const [cartItems, setCartItems] = useState({});
+  const { versionId } = state;
+  const cartId = localStorage.getItem('cartId');
+  if (checkoutCartError) {
+    console.log(checkoutCartError);
+  }
+
+  useEffect(() => {
+    console.log(versionId);
+    async function fetchData() {
+      const { data } = await handleCheckoutCart({
+        variables: {
+          cartId,
+        },
+      });
+      console.log(data.getCartItems);
+      setCartItems(data.getCartItems);
+    }
+
+    if (versionId && cartId) {
+      fetchData();
+    }
+  }, [versionId, cartId]);
 
   const handleEmailSubmit = async ({ email }) => {
-    const cartId = localStorage.getItem("cartId");
-    const versionId = localStorage.getItem("versionId");
+    const cartId = localStorage.getItem('cartId');
+    const versionId = localStorage.getItem('versionId');
     const { data } = await setEmailOfUser({
       variables: {
         cartId,
@@ -36,8 +66,8 @@ const useCheckout = () => {
     if (data) {
       const newVersionId = data.addEmailIdAsGuest.version;
       const customerEmail = data.addEmailIdAsGuest.customerEmail;
-      dispatch({ type: "SET_VERSION", payload: newVersionId });
-      localStorage.setItem("customerEmail", customerEmail);
+      dispatch({ type: 'SET_VERSION', payload: newVersionId });
+      localStorage.setItem('customerEmail', customerEmail);
       setShowEmail(true);
     }
     console.log(data);
@@ -52,8 +82,8 @@ const useCheckout = () => {
     postalCode,
     phone,
   }) => {
-    const cartId = localStorage.getItem("cartId");
-    const versionId = localStorage.getItem("versionId");
+    const cartId = localStorage.getItem('cartId');
+    const versionId = localStorage.getItem('versionId');
     const { data } = await setShippingAddress({
       variables: {
         cartId,
@@ -72,12 +102,18 @@ const useCheckout = () => {
     console.log(data);
     if (data) {
       const newVersionId = data.addShippingAddress.version;
-      dispatch({ type: "SET_VERSION", payload: newVersionId });
+      dispatch({ type: 'SET_VERSION', payload: newVersionId });
       localStorage.setItem(
-        "shippingAddress",
+        'shippingAddress',
         data.addShippingAddress.shippingAddress
       );
     }
+  };
+
+  const handleOrderCreate = async() => {
+    const cartId=localStorage.getItem('cartId')
+    const versionId=localStorage.getItem('versionId')
+    
   };
   return {
     register,
@@ -86,6 +122,8 @@ const useCheckout = () => {
     showEmail,
     setShowEmail,
     handleShippngAddressSubmit,
+    cartItems,
+    handleOrderCreate,
   };
 };
 
