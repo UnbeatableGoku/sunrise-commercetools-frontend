@@ -266,7 +266,11 @@ const verifyUserByToken = gql`
   }
 `;
 
-
+const generateOrderByCartId = gql`
+  mutation GenerateOrderByCartID($cartId: String!, $versionId: String!) {
+    generateOrderByCartID(cartId: $cartId, versionId: $versionId)
+  }
+`;
 export {
   fetch_product,
   fetchSingleProduct,
@@ -287,4 +291,5 @@ export {
   addBillingAddress,
   getCartItemsWithTypeDef,
   verifyUserByToken,
+  generateOrderByCartId,
 };

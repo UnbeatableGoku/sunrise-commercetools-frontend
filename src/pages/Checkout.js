@@ -4,7 +4,6 @@ import BillingAddress from '../components/checkout/BillingAddress';
 import CheckOutCart from '../components/checkout/CheckOutCart';
 import ShippingMethod from '../components/checkout/ShippingMethod';
 import useCheckout from '../talons/useCheckout';
-
 const Checkout = () => {
   const {
     register,
@@ -161,7 +160,7 @@ const Checkout = () => {
                 <div className='font-medium text-xl'>Billing Address</div>
                 <BillingAddress />
               </div>
-              <div>Payment</div>
+              {/* <div>Payment</div> */}
               <div className=' bg-black cursor-pointer py-2 mt-2 text-center border-2 transition-all duration-150  border-black  text-white font-bold text-base hover:bg-white  hover:text-black'>
                 <button className='w-full' onClick={() => handleOrderCreate()}>
                   Order Generate
