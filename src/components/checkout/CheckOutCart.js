@@ -1,5 +1,4 @@
 import React from 'react';
-import useCheckoutCart from '../../talons/useCheckoutCart';
 
 const CheckOutCart = ({cartItems}) => {
   // const { cartItems } = useCheckoutCart();

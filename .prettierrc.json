@@ -1,0 +1,17 @@
+{
+    "endOfLine": "auto",
+    "overrides": [
+        {
+            "files": "*.js",
+            "options": {
+                "proseWrap": "preserve"
+            }
+        },
+        {
+            "files": "*.js",
+            "options": {
+                "endOfLine": "auto"
+            }
+        }
+    ]
+}

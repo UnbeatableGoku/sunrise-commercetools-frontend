@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const fetch_product = gql`
   query GetProducts {
@@ -231,32 +231,7 @@ const addBillingAddress = gql`
 
 const getCartItemsWithTypeDef = gql`
   mutation GetCartItems($cartId: String!) {
-    getCartItems(cartId: $cartId) {
-      type
-      id
-      version
-      totalLineItemQuantity
-      versionModifiedAt
-      lineItems {
-        id
-        productId
-        productKey
-        name
-        variant {
-          id
-          sku
-          images {
-            url
-          }
-        }
-        price
-
-        quantity
-      }
-      taxedPrice
-      totalPrice
-      shippingInfo
-    }
+    getCartItems(cartId: $cartId)
   }
 `;
 
@@ -293,3 +268,31 @@ export {
   verifyUserByToken,
   generateOrderByCartId,
 };
+
+
+// {
+//   type
+//   id
+//   version
+//   totalLineItemQuantity
+//   versionModifiedAt
+//   lineItems {
+//     id
+//     productId
+//     productKey
+//     name
+//     variant {
+//       id
+//       sku
+//       images {
+//         url
+//       }
+//     }
+//     price
+
+//     quantity
+//   }
+//   taxedPrice
+//   totalPrice
+//   shippingInfo
+// }
