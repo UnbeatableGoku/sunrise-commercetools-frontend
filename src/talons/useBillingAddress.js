@@ -25,7 +25,7 @@ const useBillingAddress = () => {
       variables: {
         cartId,
         versionId,
-        shippingAddresInput: {
+        addresInput: {
           firstName,
           lastName,
           streetName,

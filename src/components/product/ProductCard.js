@@ -17,7 +17,7 @@ import useProductCard from "../../talons/useProductCard";
  */
 
 const ProductCard = ({ props }) => {
-  const { handleAddToCart, handleRemoveFromCart } = useProductCard();
+  const { handleAddToCart } = useProductCard();
   return (
     <div className="bg-white dark:bg-gray-700  border shadow-sm rounded-md m-3 dark:shadow-slate-500  shadow-slate-400">
       <div className="h-[250px] overflow-hidden z-10">

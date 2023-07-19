@@ -46,3 +46,11 @@ code {
   transform: rotate(-90deg);
   transition: transform 0.3s ease-in-out;
 }
+
+svg-icon {
+  transition: stroke 0.3s ease;
+}
+
+.svg-icon:hover {
+  stroke: black;
+}

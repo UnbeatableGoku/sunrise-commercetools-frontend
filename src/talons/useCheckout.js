@@ -130,7 +130,7 @@ const useCheckout = () => {
       variables: {
         cartId,
         versionId,
-        shippingAddresInput: {
+        addresInput: {
           firstName,
           lastName,
           streetName,

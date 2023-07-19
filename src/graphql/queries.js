@@ -122,58 +122,9 @@ const generateToken = gql`
   }
 `;
 
-const addProductToCart = gql`
-  mutation AddItemsToCart(
-    $productId: String!
-    $cartId: String!
-    $versionId: String!
-  ) {
-    addItemsToCart(
-      productId: $productId
-      cartId: $cartId
-      versionId: $versionId
-    )
-  }
-`;
-const createCart = gql`
-  mutation CreateCart($productId: String!) {
-    createCart(productId: $productId)
-  }
-`;
-
-const removeItemFromCart = gql`
-  mutation RemoveItemFromCart(
-    $lineItemId: String!
-    $cartId: String!
-    $versionId: String!
-  ) {
-    removeItemFromCart(
-      lineItemId: $lineItemId
-      cartId: $cartId
-      versionId: $versionId
-    )
-  }
-`;
-
 const getCartItems = gql`
   mutation GetCartById($cartId: String!) {
     getCartById(cartId: $cartId)
-  }
-`;
-
-const changeCartQty = gql`
-  mutation ChangeCartItemsQty(
-    $cartId: String!
-    $versionId: String!
-    $lineItemId: String!
-    $quantity: Int!
-  ) {
-    changeCartItemsQty(
-      cartId: $cartId
-      versionId: $versionId
-      lineItemId: $lineItemId
-      quantity: $quantity
-    )
   }
 `;
 
@@ -189,14 +140,14 @@ const addEmail = gql`
 
 const addShippingAddress = gql`
   mutation AddShippingAddress(
+    $addresInput: AddresInput!
     $cartId: String!
     $versionId: String!
-    $shippingAddresInput: shippingAddress
   ) {
     addShippingAddress(
+      addresInput: $addresInput
       cartId: $cartId
       versionId: $versionId
-      shippingAddresInput: $shippingAddresInput
     )
   }
 `;
@@ -217,14 +168,14 @@ const addShippingMethod = gql`
 
 const addBillingAddress = gql`
   mutation AddBillingAddress(
+    $addresInput: AddresInput!
     $cartId: String!
     $versionId: String!
-    $shippingAddresInput: shippingAddress
   ) {
     addBillingAddress(
+      addresInput: $addresInput
       cartId: $cartId
       versionId: $versionId
-      shippingAddresInput: $shippingAddresInput
     )
   }
 `;
@@ -255,11 +206,7 @@ export {
   createCustomer,
   createCustomerWithSocials,
   generateToken,
-  addProductToCart,
-  createCart,
-  removeItemFromCart,
   getCartItems,
-  changeCartQty,
   addEmail,
   addShippingAddress,
   addShippingMethod,
@@ -268,7 +215,6 @@ export {
   verifyUserByToken,
   generateOrderByCartId,
 };
-
 
 // {
 //   type
